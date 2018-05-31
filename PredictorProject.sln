@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PredictorProject", "PredictorProject\PredictorProject.csproj", "{39F7A612-9E72-44C3-8762-2B9469D12457}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PredictorProject.Tests", "PredictorProject.Tests\PredictorProject.Tests.csproj", "{48218CAA-EF94-496C-9E58-E12D48BCCC7D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{39F7A612-9E72-44C3-8762-2B9469D12457}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39F7A612-9E72-44C3-8762-2B9469D12457}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39F7A612-9E72-44C3-8762-2B9469D12457}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39F7A612-9E72-44C3-8762-2B9469D12457}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48218CAA-EF94-496C-9E58-E12D48BCCC7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48218CAA-EF94-496C-9E58-E12D48BCCC7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48218CAA-EF94-496C-9E58-E12D48BCCC7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48218CAA-EF94-496C-9E58-E12D48BCCC7D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
