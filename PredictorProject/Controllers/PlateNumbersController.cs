@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PredictorProject.Models;
+using PredictorProject.Services;
 
 namespace PredictorProject.Controllers
 {
@@ -46,82 +47,34 @@ namespace PredictorProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id")] PlateNumberModel plateNumber)
+        public ActionResult Create([Bind(Include = "id,plate,dateToCheck,timeToCheck")] PlateNumberModel plateNumber)
         {
+            var plate = plateNumber;
             if (ModelState.IsValid)
             {
-                db.PlateNumbers.Add(plateNumber);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                //Validate Informacion
+                var plateNumberService = new PlateNumberService();
+                var lastDigitPlate = plateNumber.plate[plateNumber.plate.Length - 1];
+                var dayWeek = plateNumber.dateToCheck.ToString("ddd");
+                DateTime convertHour = MergeHourToday(plateNumber.timeToCheck);
 
-            return View(plateNumber);
-        }
 
-        // GET: PlateNumbers/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PlateNumberModel plateNumber = db.PlateNumbers.Find(id);
-            if (plateNumber == null)
-            {
-                return HttpNotFound();
-            }
-            return View(plateNumber);
-        }
+                var result = plateNumberService.getResult(lastDigitPlate, dayWeek, convertHour);
 
-        // POST: PlateNumbers/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id")] PlateNumberModel plateNumber)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(plateNumber).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(plateNumber);
-        }
+                ViewBag.alert = result;
 
-        // GET: PlateNumbers/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View(plateNumber);
+               
             }
-            PlateNumberModel plateNumber = db.PlateNumbers.Find(id);
-            if (plateNumber == null)
-            {
-                return HttpNotFound();
-            }
-            return View(plateNumber);
-        }
-
-        // POST: PlateNumbers/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            PlateNumberModel plateNumber = db.PlateNumbers.Find(id);
-            db.PlateNumbers.Remove(plateNumber);
-            db.SaveChanges();
             return RedirectToAction("Index");
+
         }
 
-        protected override void Dispose(bool disposing)
+
+        public DateTime MergeHourToday(DateTime timePredictor)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            return DateTime.Today.AddHours(timePredictor.Hour).AddMinutes(timePredictor.Minute).AddSeconds(timePredictor.Second);
+
         }
     }
 }

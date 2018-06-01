@@ -154,6 +154,7 @@
     <Compile Include="Models\PlateNumberModel.cs" />
     <Compile Include="Models\PlateNumberContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\PlateNumberService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
